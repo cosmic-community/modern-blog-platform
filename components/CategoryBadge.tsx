@@ -25,8 +25,9 @@ export default function CategoryBadge({
 
   const backgroundColor = category.metadata?.color || '#6b7280'
   
-  const badgeStyle = variant === 'default' 
-    ? { backgroundColor } 
+  // Create CSS custom properties for dynamic colors instead of inline styles
+  const cssVariables = variant === 'default' 
+    ? { '--category-bg-color': backgroundColor } as React.CSSProperties
     : {}
 
   return (
@@ -36,8 +37,9 @@ export default function CategoryBadge({
         inline-flex items-center font-medium rounded-full transition-all hover:shadow-md
         ${sizeClasses[size]}
         ${variantClasses[variant]}
+        ${variant === 'default' ? 'category-badge-dynamic' : ''}
       `}
-      style={badgeStyle}
+      style={cssVariables}
     >
       {category.title}
     </Link>
