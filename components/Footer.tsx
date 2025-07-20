@@ -1,3 +1,5 @@
+'use client'
+
 export default function Footer() {
   const COSMIC_BUCKET_SLUG = process.env.COSMIC_BUCKET_SLUG
 
@@ -83,29 +85,12 @@ export default function Footer() {
               href={`https://www.cosmicjs.com?utm_source=bucket_${COSMIC_BUCKET_SLUG}&utm_medium=referral&utm_campaign=app_footer&utm_content=built_with_cosmic`}
               target="_blank"
               rel="noopener noreferrer"
-              style={{
-                backgroundColor: '#11171A',
-                color: 'white',
-                padding: '8px 16px',
-                borderRadius: '6px',
-                fontSize: '14px',
-                fontWeight: 500,
-                textDecoration: 'none',
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: '8px',
-                transition: 'background-color 0.2s ease'
-              }}
-              onMouseOver={(e) => e.currentTarget.style.backgroundColor = '#1a2326'}
-              onMouseOut={(e) => e.currentTarget.style.backgroundColor = '#11171A'}
+              className="inline-flex items-center gap-2 px-4 py-2 bg-[#11171A] text-white text-sm font-medium rounded-md hover:bg-[#1a2326] transition-colors"
             >
               <img 
                 src="https://cdn.cosmicjs.com/b67de7d0-c810-11ed-b01d-23d7b265c299-logo508x500.svg" 
                 alt="Cosmic Logo" 
-                style={{
-                  width: '20px',
-                  height: '20px',
-                }}
+                className="w-5 h-5"
               />
               Built with Cosmic
             </a>
