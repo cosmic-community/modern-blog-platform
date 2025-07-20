@@ -22,17 +22,22 @@ export default function PostContent({ content }: PostContentProps) {
           li: ({children}) => <li className="text-gray-700">{children}</li>,
           blockquote: ({children}) => <blockquote className="border-l-4 border-primary-500 pl-4 italic text-gray-600 my-6">{children}</blockquote>,
           strong: ({children}) => <strong className="font-semibold text-gray-900">{children}</strong>,
-          a: ({href, children, ...props}) => (
-            <a 
-              href={href} 
-              className="text-primary-600 hover:text-primary-700 underline"
-              target={href?.startsWith('http') ? '_blank' : undefined}
-              rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
-              {...props}
-            >
-              {children}
-            </a>
-          ),
+          a: ({href, children, ...props}) => {
+            // Filter out event handlers and other non-serializable props
+            const { onMouseOver, onMouseOut, onFocus, onBlur, onClick, ...safeProps } = props;
+            
+            return (
+              <a 
+                href={href} 
+                className="text-primary-600 hover:text-primary-700 underline"
+                target={href?.startsWith('http') ? '_blank' : undefined}
+                rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+                {...safeProps}
+              >
+                {children}
+              </a>
+            );
+          },
         }}
       >
         {content}
