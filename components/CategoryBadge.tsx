@@ -23,12 +23,21 @@ export default function CategoryBadge({
     white: 'bg-white text-gray-900 border border-gray-200'
   }
 
-  const backgroundColor = category.metadata?.color || '#6b7280'
-  
-  // Create CSS custom properties for dynamic colors instead of inline styles
-  const cssVariables = variant === 'default' 
-    ? { '--category-bg-color': backgroundColor } as React.CSSProperties
-    : {}
+  // Map category slugs to CSS classes to avoid inline styles
+  const getCategoryClass = (categorySlug: string) => {
+    const categoryClassMap: Record<string, string> = {
+      technology: 'category-badge-technology',
+      lifestyle: 'category-badge-lifestyle',
+      travel: 'category-badge-travel',
+      business: 'category-badge-business',
+      health: 'category-badge-health',
+      food: 'category-badge-food'
+    }
+    
+    return categoryClassMap[categorySlug] || 'category-badge-default'
+  }
+
+  const categoryColorClass = variant === 'default' ? getCategoryClass(category.slug) : ''
 
   return (
     <Link 
@@ -37,9 +46,8 @@ export default function CategoryBadge({
         inline-flex items-center font-medium rounded-full transition-all hover:shadow-md
         ${sizeClasses[size]}
         ${variantClasses[variant]}
-        ${variant === 'default' ? 'category-badge-dynamic' : ''}
-      `}
-      style={cssVariables}
+        ${categoryColorClass}
+      `.trim()}
     >
       {category.title}
     </Link>
