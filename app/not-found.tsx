@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import BackButton from '../components/BackButton'
 
 export default function NotFound() {
   return (
@@ -23,12 +24,7 @@ export default function NotFound() {
           >
             Return Home
           </Link>
-          <button
-            onClick={() => window.history.back()}
-            className="inline-block w-full bg-gray-200 text-gray-900 px-6 py-3 rounded-lg font-medium hover:bg-gray-300 transition-colors"
-          >
-            Go Back
-          </button>
+          <BackButton />
         </div>
       </div>
     </div>
