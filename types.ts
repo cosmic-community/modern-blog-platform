@@ -56,6 +56,26 @@ interface Category extends CosmicObject {
   };
 }
 
+// About Page interface
+interface AboutPage extends CosmicObject {
+  type: 'about-pages';
+  metadata: {
+    page_title?: string;
+    hero_image?: {
+      url: string;
+      imgix_url: string;
+    };
+    introduction?: string;
+    main_content?: string;
+    mission_statement?: string;
+    team_photo?: {
+      url: string;
+      imgix_url: string;
+    };
+    contact_email?: string;
+  };
+}
+
 // API response types
 interface CosmicResponse<T> {
   objects: T[];
@@ -81,12 +101,17 @@ function isCategory(obj: CosmicObject): obj is Category {
   return obj.type === 'categories';
 }
 
+function isAboutPage(obj: CosmicObject): obj is AboutPage {
+  return obj.type === 'about-pages';
+}
+
 // Export types
 export type {
   CosmicObject,
   Post,
   Author,
   Category,
+  AboutPage,
   CosmicResponse,
   CosmicSingleResponse
 };
@@ -94,5 +119,6 @@ export type {
 export {
   isPost,
   isAuthor,
-  isCategory
+  isCategory,
+  isAboutPage
 };

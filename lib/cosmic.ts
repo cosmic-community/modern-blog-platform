@@ -169,3 +169,18 @@ export async function getFeaturedPosts(): Promise<import('../types').Post[]> {
     throw new Error('Failed to fetch featured posts');
   }
 }
+
+export async function getAboutPage(): Promise<import('../types').AboutPage | null> {
+  try {
+    const response = await cosmic.objects
+      .findOne({ type: 'about-pages', slug: 'about' })
+      .props(['id', 'title', 'slug', 'metadata']);
+    return response.object as import('../types').AboutPage;
+  } catch (error) {
+    if (hasStatus(error) && error.status === 404) {
+      return null;
+    }
+    console.error('Error fetching about page:', error);
+    throw new Error('Failed to fetch about page');
+  }
+}
