@@ -1,3 +1,5 @@
+'use client'
+
 import Link from 'next/link'
 import { Post } from '@/types'
 import CategoryBadge from '@/components/CategoryBadge'
