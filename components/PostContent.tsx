@@ -1,5 +1,3 @@
-'use client'
-
 import ReactMarkdown from 'react-markdown'
 import remarkGfm from 'remark-gfm'
 
@@ -22,8 +20,17 @@ export default function PostContent({ content }: PostContentProps) {
           li: ({children}) => <li className="text-gray-700">{children}</li>,
           blockquote: ({children}) => <blockquote className="border-l-4 border-primary-500 pl-4 italic text-gray-600 my-6">{children}</blockquote>,
           strong: ({children}) => <strong className="font-semibold text-gray-900">{children}</strong>,
+          a: ({href, children}) => (
+            <a 
+              href={href} 
+              className="text-primary-600 hover:text-primary-700 underline transition-colors"
+              target={href?.startsWith('http') ? '_blank' : undefined}
+              rel={href?.startsWith('http') ? 'noopener noreferrer' : undefined}
+            >
+              {children}
+            </a>
+          ),
         }}
-        className="[&_a]:text-primary-600 [&_a]:hover:text-primary-700 [&_a]:underline"
       >
         {content}
       </ReactMarkdown>
